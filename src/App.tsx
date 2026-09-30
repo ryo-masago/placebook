@@ -1,3 +1,5 @@
+import PlaceCard from "./components/PlaceCard"
+
 type Place = {
   id: number
   name: string
@@ -39,11 +41,13 @@ function App() {
       <h2>Your Places</h2>
 
       {places.map((place) => (
-        <div key = {place.id}>
-          <h3>{place.name}</h3>
-          <p>{place.category}・{place.area}</p>
-          <p>{place.status}</p>
-        </div>
+        <PlaceCard
+          key = {place.id}
+          name = {place.name}
+          category = {place.category}
+          area = {place.area}
+          status = {place.status}
+        />
       ))}
     </main>
   )
