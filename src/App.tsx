@@ -1,12 +1,5 @@
 import PlaceCard from "./components/PlaceCard"
-
-type Place = {
-  id: number
-  name: string
-  category: string
-  area: string
-  status: "visited" | "want-to-visit"
-}
+import type {Place} from "./types/Place"
 
 const places: Place[] = [
   {
@@ -43,10 +36,7 @@ function App() {
       {places.map((place) => (
         <PlaceCard
           key = {place.id}
-          name = {place.name}
-          category = {place.category}
-          area = {place.area}
-          status = {place.status}
+          place = {place}
         />
       ))}
     </main>

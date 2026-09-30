@@ -1,21 +1,15 @@
+import type {Place} from "../types/Place"
+
 type PlaceCardProps = {
-  name: string
-  category: string
-  area: string
-  status: "visited" | "want-to-visit"
+  place: Place
 }
 
-function PlaceCard({
-  name,
-  category,
-  area,
-  status
-}: PlaceCardProps) {
+function PlaceCard({place}: PlaceCardProps) {
   return (
     <div>
-      <h3>{name}</h3>
-      <p>{category}・{area}</p>
-      <p>{status === "visited" ? "Visited" : "Want to Visit"}</p>
+      <h3>{place.name}</h3>
+      <p>{place.category}・{place.area}</p>
+      <p>{place.status === "visited" ? "Visited" : "Want to Visit"}</p>
     </div>
   )
 }
