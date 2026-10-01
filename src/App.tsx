@@ -30,6 +30,12 @@ function App() {
   }
   ])
 
+  function handleDelete(id: number) {
+    setPlaces((currentPlaces) =>
+      currentPlaces.filter((place) => place.id !== id)
+    )
+  }
+
   return (
     <main>
       <h1>Placebook</h1>
@@ -42,6 +48,7 @@ function App() {
         <PlaceCard
           key = {place.id}
           place = {place}
+          onDelete = {handleDelete}
         />
       ))}
 
