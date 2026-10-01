@@ -1,6 +1,7 @@
 import PlaceCard from "./components/PlaceCard"
 import type {Place} from "./types/Place"
 import {useState} from "react"
+import PlaceForm from "./components/PlaceForm"
 
 function App() {
   const [places, setPlaces] = useState<Place[]>([
@@ -30,6 +31,13 @@ function App() {
   }
   ])
 
+  function handleAdd(place: Place) {
+    setPlaces((currentPlaces) => [
+      ...currentPlaces,
+      place,
+    ])
+  }
+
   function handleDelete(id: number) {
     setPlaces((currentPlaces) =>
       currentPlaces.filter((place) => place.id !== id)
@@ -43,6 +51,8 @@ function App() {
 
       <h2>Your Places</h2>
       <p>Total Places: {places.length}</p>
+
+      <PlaceForm onAdd = {handleAdd}/>
 
       {places.map((place) => (
         <PlaceCard
