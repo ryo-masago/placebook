@@ -1,37 +1,42 @@
 import PlaceCard from "./components/PlaceCard"
 import type {Place} from "./types/Place"
+import {useState} from "react"
 
-const places: Place[] = [
+function App() {
+  const [places, setPlaces] = useState<Place[]>([
   {
     id: 1,
     name: "Coffee Mameya",
     category: "Cafe",
     area: "Omotesando",
-    status: "visited"
+    status: "visited",
+    notes: "Great coffee!"
   },
   {
     id: 2,
     name: "Shinuku Gyoen",
     category: "Park",
     area: "Shinjuku",
-    status: "want-to-visit"
+    status: "want-to-visit",
+    notes: "Visit in October"
   },
   {
     id: 3,
     name: "Tsukiji Outer Market",
     category: "Food",
     area: "Tsukiji",
-    status: "visited"
+    status: "visited",
+    notes: "Buy seafood"
   }
-]
+  ])
 
-function App() {
   return (
     <main>
       <h1>Placebook</h1>
       <p>Save the places you want to visit and remember.</p>
 
       <h2>Your Places</h2>
+      <p>Total Places: {places.length}</p>
 
       {places.map((place) => (
         <PlaceCard
@@ -39,6 +44,8 @@ function App() {
           place = {place}
         />
       ))}
+
+      <button onClick = {() => setPlaces ([])}>Clear All Places</button>
     </main>
   )
 }

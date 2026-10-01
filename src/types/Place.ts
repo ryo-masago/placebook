@@ -4,4 +4,5 @@ export type Place = {
   category: string
   area: string
   status: "visited" | "want-to-visit"
+  notes: string
 }
