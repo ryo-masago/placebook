@@ -3,6 +3,8 @@ import type {Place} from "./types/Place"
 import {useState} from "react"
 import PlaceForm from "./components/PlaceForm"
 
+type Filter = "all" | "visited" | "want-to-visit"
+
 function App() {
   const [places, setPlaces] = useState<Place[]>([
   {
@@ -31,6 +33,16 @@ function App() {
   }
   ])
 
+  const [filter, setFilter] = useState<Filter>("all")
+
+  const filteredPlaces = places.filter((place) => {
+    if (filter === "all") {
+      return true
+    }
+
+    return place.status == filter
+  })
+
   function handleAdd(place: Place) {
     setPlaces((currentPlaces) => [
       ...currentPlaces,
@@ -54,7 +66,15 @@ function App() {
 
       <PlaceForm onAdd = {handleAdd}/>
 
-      {places.map((place) => (
+      <div>
+        <button onClick = {() => setFilter("all")}>All</button>
+        <button onClick = {() => setFilter("visited")}>Visited</button>
+        <button onClick = {() => setFilter("want-to-visit")}>Want to Visit</button>
+      </div>
+
+      <p>Showing {filteredPlaces.length} of {places.length} Places</p>
+
+      {filteredPlaces.map((place) => (
         <PlaceCard
           key = {place.id}
           place = {place}
