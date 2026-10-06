@@ -1,5 +1,9 @@
 import {useState} from "react"
-import type {Place} from "../types/Place"
+import type {
+  Place,
+  Category,
+  PlaceStatus
+} from "../types/Place"
 
 type PlaceFormProps = {
   onAdd: (place: Place) => void
@@ -7,8 +11,9 @@ type PlaceFormProps = {
 
 function PlaceForm({onAdd}: PlaceFormProps) {
   const [name, setName] = useState("")
-  const [category, setCategory] = useState("")
+  const [category, setCategory] = useState<Category>("Cafe")
   const [area, setArea] = useState("")
+  const [status, setStatus] = useState<PlaceStatus>("want-to-visit")
   const [notes, setNotes] = useState("")
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -19,15 +24,16 @@ function PlaceForm({onAdd}: PlaceFormProps) {
       name: name,
       category: category,
       area: area,
-      status: "want-to-visit",
+      status: status,
       notes: notes
     }
 
     onAdd(newPlace)
 
     setName("")
-    setCategory("")
+    setCategory("Cafe")
     setArea("")
+    setStatus("want-to-visit")
     setNotes("")
   }
 
@@ -45,12 +51,20 @@ function PlaceForm({onAdd}: PlaceFormProps) {
 
       <div>
         <label htmlFor = "category">Category</label>
-        <input
+        <select
           id = "category"
-          type="text"
           value = {category}
-          onChange = {(event) => setCategory(event.target.value)}
-        />
+          onChange = {(event) =>
+            setCategory(event.target.value as Category)
+          }
+        >
+          <option value = "Cafe">Cafe</option>
+          <option value = "Restaurant">Restaurant</option>
+          <option value = "Bar">Bar</option>
+          <option value = "Park">Park</option>
+          <option value = "Shop">Shop</option>
+          <option value = "Other">Other</option>
+        </select>
       </div>
 
       <div>
@@ -61,6 +75,20 @@ function PlaceForm({onAdd}: PlaceFormProps) {
           value = {area}
           onChange = {(event) => setArea(event.target.value)}
         />
+      </div>
+
+      <div>
+        <label htmlFor = "staus">Status</label>
+        <select
+          id = "status"
+          value = {status}
+          onChange = {(event) =>
+            setStatus(event.target.value as PlaceStatus)
+          }
+        >
+          <option value = "want-to-visit">Want to Visit</option>
+          <option value = "visited">Visited</option>
+        </select>
       </div>
 
       <div>

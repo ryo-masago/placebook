@@ -1,8 +1,20 @@
+export type Category =
+  | "Cafe"
+  | "Restaurant"
+  | "Bar"
+  | "Park"
+  | "Shop"
+  | "Other"
+
+export type PlaceStatus =
+  | "visited"
+  | "want-to-visit"
+
 export type Place = {
   id: number
   name: string
-  category: string
+  category: Category
   area: string
-  status: "visited" | "want-to-visit"
+  status: PlaceStatus
   notes: string
 }
